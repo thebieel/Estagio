@@ -75,6 +75,15 @@
   </div>
 
   <script>
+    const agendamentosData = [174, 207, 157, 103, 17, 166, 47, 266, 168, 78, 4, 150, 109, 87, 52, 148, 144, 85, 72, 3, 177, 96, 75];
+    const ligacoesData = [203, 207, 181, 150, 25, 370, 166, 334, 246, 152, 10, 319, 209, 182, 104, 336, 351, 207, 154, 15, 320, 187, 203];
+
+    const mediaAgendamentos = agendamentosData.reduce((a, b) => a + b, 0) / agendamentosData.length;
+    const mediaLigacoes = ligacoesData.reduce((a, b) => a + b, 0) / ligacoesData.length;
+
+    const mediaAgendamentosArray = new Array(agendamentosData.length).fill(mediaAgendamentos);
+    const mediaLigacoesArray = new Array(ligacoesData.length).fill(mediaLigacoes);
+
     const ctxCalls = document.getElementById('callsChart').getContext('2d');
     new Chart(ctxCalls, {
       type: 'line',
@@ -83,21 +92,41 @@
         datasets: [
           {
             label: 'Agendamentos',
-            data: [174, 207, 157, 103, 17, 166, 47, 266, 168, 78, 4, 150, 109, 87, 52, 148, 144, 85, 72, 3, 177, 96, 75],
+            data: agendamentosData,
             borderColor: 'lightblue',
-            backgroundColor: 'blue',
+            backgroundColor: 'transparent',
             tension: 0.2,
             pointRadius: 4,
             pointHoverRadius: 6
           },
           {
             label: 'Ligações Recebidas',
-            data: [203, 207, 181, 150, 25, 370, 166, 334, 246, 152, 10, 319, 209, 182, 104, 336, 351, 207, 154, 15, 320, 187, 203],
-            borderColor: 'lightblue',
-            backgroundColor: 'blue',
+            data: ligacoesData,
+            borderColor: 'blue',
+            backgroundColor: 'transparent',
             tension: 0.2,
             pointRadius: 4,
             pointHoverRadius: 6
+          },
+          {
+            label: 'Média Agendamentos',
+            data: mediaAgendamentosArray,
+            borderColor: 'green',
+            borderDash: [5, 5],
+            borderWidth: 2,
+            pointRadius: 0,
+            fill: false,
+            tension: 0.1
+          },
+          {
+            label: 'Média Ligações',
+            data: mediaLigacoesArray,
+            borderColor: 'darkblue',
+            borderDash: [5, 5],
+            borderWidth: 2,
+            pointRadius: 0,
+            fill: false,
+            tension: 0.1
           }
         ]
       },
@@ -147,20 +176,20 @@
         scales: {
           y: { 
             beginAtZero: true,
-          ticks:{ color: 'black'} 
+            ticks:{ color: 'black'} 
+          },
+          x: {
+            ticks:{ color: 'black' }
+          }
         },
-        x: {
-          ticks:{ color: 'black' }
-        }
-      },
-      plugins: {
-        legend: {
-          labels: {
-            color: 'black'
+        plugins: {
+          legend: {
+            labels: {
+              color: 'black'
+            }
           }
         }
-      }
-   }});
+     }});
 
     const ctxTrend = document.getElementById('trendChart').getContext('2d');
     new Chart(ctxTrend, {
