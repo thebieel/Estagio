@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Dashboard Call Center</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    .scroll-dark::-webkit-scrollbar {
+      width: 8px;
+    }
+    .scroll-dark::-webkit-scrollbar-track {
+      background: #1f2937;
+    }
+    .scroll-dark::-webkit-scrollbar-thumb {
+      background-color: #4b5563;
+      border-radius: 4px;
+    }
+    .scroll-dark {
+      scrollbar-width: thin;
+      scrollbar-color: #4b5563 #1f2937;
+    }
+  </style>
+</head>
+<body class="bg-gray-400 text-black font-sans">
+  <div class="grid grid-cols-1 md:grid-cols-2 md:grid-rows-2 gap-4 p-4 h-screen overflow-auto">
+
+    <!-- Tela 1 -->
+    <div class="bg-white rounded-2xl shadow-lg p-4 overflow-y-auto max-h-[350px] scroll-light">
+      <h2 class="text-xl font-bold mb-2">Agendamentos vs Ligações</h2>
+      <canvas id="callsChart"></canvas>
+    </div>
+
+    <!-- Tela 2 -->
+    <div class="bg-white rounded-2xl shadow-lg p-4 overflow-y-auto max-h-[350px] scroll-light">
+      <h2 class="text-xl font-bold mb-2">KPIs de Performance</h2>
+      <canvas id="kpiChart"></canvas>
+    </div>
+
+    <!-- Tela 3 -->
+    <div class="bg-white rounded-2xl shadow-lg p-4 overflow-y-auto max-h-[350px] scroll-light">
+      <h2 class="text-xl font-bold mb-2">Produtividade da Equipe</h2>
+      <table class="w-full text-sm">
+        <thead>
+          <tr>
+            <th class="text-left">Operador</th>
+            <th>Chamadas</th>
+            <th>Status</th>
+            <th>Tempo Logado</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>Pontes</td><td>35</td><td>Ativo</td><td>4h 30m</td></tr>
+          <tr><td>Pontes</td><td>35</td><td>Ativo</td><td>4h 30m</td></tr>
+          <tr><td>Pontes</td><td>35</td><td>Ativo</td><td>4h 30m</td></tr>
+          <tr><td>Pontes</td><td>35</td><td>Ativo</td><td>4h 30m</td></tr>
+          <tr><td>Pontes</td><td>35</td><td>Ativo</td><td>4h 30m</td></tr>
+          <tr><td>Pontes</td><td>35</td><td>Ativo</td><td>4h 30m</td></tr>
+          <tr><td>Pontes</td><td>35</td><td>Ativo</td><td>4h 30m</td></tr>
+          <tr><td>Pontes</td><td>35</td><td>Ativo</td><td>4h 30m</td></tr>
+          <tr><td>Pontes</td><td>35</td><td>Ativo</td><td>4h 30m</td></tr>
+          <tr><td>Pontes</td><td>35</td><td>Ativo</td><td>4h 30m</td></tr>
+          <tr><td>Pontes</td><td>35</td><td>Ativo</td><td>4h 30m</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Tela 4 -->
+    <div class="bg-white rounded-2xl shadow-lg p-4 overflow-y-auto max-h-[350px] scroll-light">
+      <h2 class="text-xl font-bold mb-2">Tendências e Estratégia</h2>
+      <canvas id="trendChart"></canvas>
+    </div>
+
+  </div>
+
+  <script>
+    const agendamentosData = [174, 207, 157, 103, 17, 166, 47, 266, 168, 78, 4, 150, 109, 87, 52, 148, 144, 85, 72, 3, 177, 96, 75];
+    const ligacoesData = [203, 207, 181, 150, 25, 370, 166, 334, 246, 152, 10, 319, 209, 182, 104, 336, 351, 207, 154, 15, 320, 187, 203];
+
+    const mediaAgendamentos = agendamentosData.reduce((a, b) => a + b, 0) / agendamentosData.length;
+    const mediaLigacoes = ligacoesData.reduce((a, b) => a + b, 0) / ligacoesData.length;
+
+    const mediaAgendamentosArray = new Array(agendamentosData.length).fill(mediaAgendamentos);
+    const mediaLigacoesArray = new Array(ligacoesData.length).fill(mediaLigacoes);
+
+    const ctxCalls = document.getElementById('callsChart').getContext('2d');
+    new Chart(ctxCalls, {
+      type: 'line',
+      data: {
+        labels: ['01-04-25', '02-04-25', '03-04-25', '04-04-25', '05-04-25', '07-04-25','08-04-25', '09-04-25', '10-04-25', '11-04-25', '12-04-25', '14-04-25','15-04-25', '16-04-25', '17-04-25', '22-04-25', '23-04-25', '24-04-25','25-04-25', '26-04-25', '28-04-25', '29-04-25', '30-04-25'],
+        datasets: [
+          {
+            label: 'Agendamentos',
+            data: agendamentosData,
+            borderColor: 'lightblue',
+            backgroundColor: 'transparent',
+            tension: 0.2,
+            pointRadius: 4,
+            pointHoverRadius: 6
+          },
+          {
+            label: 'Ligações Recebidas',
+            data: ligacoesData,
+            borderColor: 'blue',
+            backgroundColor: 'transparent',
+            tension: 0.2,
+            pointRadius: 4,
+            pointHoverRadius: 6
+          },
+          {
+            label: 'Média Agendamentos',
+            data: mediaAgendamentosArray,
+            borderColor: 'green',
+            borderDash: [5, 5],
+            borderWidth: 2,
+            pointRadius: 0,
+            fill: false,
+            tension: 0.1
+          },
+          {
+            label: 'Média Ligações',
+            data: mediaLigacoesArray,
+            borderColor: 'darkblue',
+            borderDash: [5, 5],
+            borderWidth: 2,
+            pointRadius: 0,
+            fill: false,
+            tension: 0.1
+          }
+        ]
+      },
+      options: {
+        responsive: true,
+        plugins: {
+          legend: {
+            labels: { color: 'black' }
+          },
+          title: {
+            display: true,
+            text: 'Agendamentos vs Ligações Recebidas por Dia',
+            color: 'black'
+          }
+        },
+        scales: {
+          x: {
+            ticks: {
+              color: 'black',
+              font: { size: 10 },
+              maxRotation: 30,
+              minRotation: 0
+            }
+          },
+          y: {
+            beginAtZero: true,
+            ticks: { color: 'black' }
+          }
+        }
+      }
+    });
+
+    const ctxKPI = document.getElementById('kpiChart').getContext('2d');
+    new Chart(ctxKPI, {
+      type: 'bar',
+      data: {
+        labels: ['TMA', 'TME', 'SLA', 'CSAT'],
+        datasets: [{
+          label: 'Indicadores',
+          data: [320, 40, 90, 85],
+          backgroundColor: ['lightblue', 'blue', 'lightblue', 'blue'],
+          borderRadius: 15
+        }]
+      },
+      options: {
+        responsive: true,
+        scales: {
+          y: { 
+            beginAtZero: true,
+            ticks:{ color: 'black'} 
+          },
+          x: {
+            ticks:{ color: 'black' }
+          }
+        },
+        plugins: {
+          legend: {
+            labels: {
+              color: 'black'
+            }
+          }
+        }
+     }});
+
+    const ctxTrend = document.getElementById('trendChart').getContext('2d');
+    new Chart(ctxTrend, {
+      type: 'line',
+      data: {
+        labels: ['Seg', 'Ter', 'Qua', 'Qui', 'Sex'],
+        datasets: [{
+          label: 'Volume de Chamadas',
+          data: [100, 150, 200, 180, 160],
+          borderColor: 'blue',
+          fill: false
+        }]
+      },
+      options: {
+        responsive: true
+      }
+    });
+  </script>
+</body>
+</html>

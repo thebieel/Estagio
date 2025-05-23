@@ -23,23 +23,23 @@
     }
   </style>
 </head>
-<body class="bg-gray-900 text-white font-sans">
+<body class="bg-gray-400 text-black font-sans">
   <div class="grid grid-cols-1 md:grid-cols-2 md:grid-rows-2 gap-4 p-4 h-screen overflow-auto">
 
     <!-- Tela 1 -->
-    <div class="bg-gray-800 rounded-2xl shadow-lg p-4 overflow-y-auto max-h-[350px] scroll-dark">
+    <div class="bg-white rounded-2xl shadow-lg p-4 overflow-y-auto max-h-[350px] scroll-light">
       <h2 class="text-xl font-bold mb-2">Agendamentos vs Ligações</h2>
       <canvas id="callsChart"></canvas>
     </div>
 
     <!-- Tela 2 -->
-    <div class="bg-gray-800 rounded-2xl shadow-lg p-4 overflow-y-auto max-h-[350px] scroll-dark">
+    <div class="bg-white rounded-2xl shadow-lg p-4 overflow-y-auto max-h-[350px] scroll-light">
       <h2 class="text-xl font-bold mb-2">KPIs de Performance</h2>
       <canvas id="kpiChart"></canvas>
     </div>
 
     <!-- Tela 3 -->
-    <div class="bg-gray-800 rounded-2xl shadow-lg p-4 overflow-y-auto max-h-[350px] scroll-dark">
+    <div class="bg-white rounded-2xl shadow-lg p-4 overflow-y-auto max-h-[350px] scroll-light">
       <h2 class="text-xl font-bold mb-2">Produtividade da Equipe</h2>
       <table class="w-full text-sm">
         <thead>
@@ -51,15 +51,23 @@
           </tr>
         </thead>
         <tbody>
-          <tr><td>João</td><td>32</td><td>Ativo</td><td>4h 12m</td></tr>
-          <tr><td>Maria</td><td>28</td><td>Pausa</td><td>3h 40m</td></tr>
-          <tr><td>Lucas</td><td>35</td><td>Ativo</td><td>4h 30m</td></tr>
+          <tr><td>Pontes</td><td>35</td><td>Ativo</td><td>4h 30m</td></tr>
+          <tr><td>Pontes</td><td>35</td><td>Ativo</td><td>4h 30m</td></tr>
+          <tr><td>Pontes</td><td>35</td><td>Ativo</td><td>4h 30m</td></tr>
+          <tr><td>Pontes</td><td>35</td><td>Ativo</td><td>4h 30m</td></tr>
+          <tr><td>Pontes</td><td>35</td><td>Ativo</td><td>4h 30m</td></tr>
+          <tr><td>Pontes</td><td>35</td><td>Ativo</td><td>4h 30m</td></tr>
+          <tr><td>Pontes</td><td>35</td><td>Ativo</td><td>4h 30m</td></tr>
+          <tr><td>Pontes</td><td>35</td><td>Ativo</td><td>4h 30m</td></tr>
+          <tr><td>Pontes</td><td>35</td><td>Ativo</td><td>4h 30m</td></tr>
+          <tr><td>Pontes</td><td>35</td><td>Ativo</td><td>4h 30m</td></tr>
+          <tr><td>Pontes</td><td>35</td><td>Ativo</td><td>4h 30m</td></tr>
         </tbody>
       </table>
     </div>
 
     <!-- Tela 4 -->
-    <div class="bg-gray-800 rounded-2xl shadow-lg p-4 overflow-y-auto max-h-[350px] scroll-dark">
+    <div class="bg-white rounded-2xl shadow-lg p-4 overflow-y-auto max-h-[350px] scroll-light">
       <h2 class="text-xl font-bold mb-2">Tendências e Estratégia</h2>
       <canvas id="trendChart"></canvas>
     </div>
@@ -76,8 +84,8 @@
           {
             label: 'Agendamentos',
             data: [174, 207, 157, 103, 17, 166, 47, 266, 168, 78, 4, 150, 109, 87, 52, 148, 144, 85, 72, 3, 177, 96, 75],
-            borderColor: '#10B981',
-            backgroundColor: 'transparent',
+            borderColor: 'lightblue',
+            backgroundColor: 'blue',
             tension: 0.2,
             pointRadius: 4,
             pointHoverRadius: 6
@@ -85,8 +93,8 @@
           {
             label: 'Ligações Recebidas',
             data: [203, 207, 181, 150, 25, 370, 166, 334, 246, 152, 10, 319, 209, 182, 104, 336, 351, 207, 154, 15, 320, 187, 203],
-            borderColor: '#3B82F6',
-            backgroundColor: 'transparent',
+            borderColor: 'lightblue',
+            backgroundColor: 'blue',
             tension: 0.2,
             pointRadius: 4,
             pointHoverRadius: 6
@@ -97,18 +105,18 @@
         responsive: true,
         plugins: {
           legend: {
-            labels: { color: '#ccc' }
+            labels: { color: 'black' }
           },
           title: {
             display: true,
             text: 'Agendamentos vs Ligações Recebidas por Dia',
-            color: '#fff'
+            color: 'black'
           }
         },
         scales: {
           x: {
             ticks: {
-              color: '#ccc',
+              color: 'black',
               font: { size: 10 },
               maxRotation: 30,
               minRotation: 0
@@ -116,7 +124,7 @@
           },
           y: {
             beginAtZero: true,
-            ticks: { color: '#ccc' }
+            ticks: { color: 'black' }
           }
         }
       }
@@ -130,16 +138,29 @@
         datasets: [{
           label: 'Indicadores',
           data: [320, 40, 90, 85],
-          backgroundColor: ['#3B82F6', '#10B981', '#F59E0B', '#EF4444']
+          backgroundColor: ['lightblue', 'blue', 'lightblue', 'blue'],
+          borderRadius: 15
         }]
       },
       options: {
         responsive: true,
         scales: {
-          y: { beginAtZero: true }
+          y: { 
+            beginAtZero: true,
+          ticks:{ color: 'black'} 
+        },
+        x: {
+          ticks:{ color: 'black' }
+        }
+      },
+      plugins: {
+        legend: {
+          labels: {
+            color: 'black'
+          }
         }
       }
-    });
+   }});
 
     const ctxTrend = document.getElementById('trendChart').getContext('2d');
     new Chart(ctxTrend, {
@@ -149,7 +170,7 @@
         datasets: [{
           label: 'Volume de Chamadas',
           data: [100, 150, 200, 180, 160],
-          borderColor: '#3B82F6',
+          borderColor: 'blue',
           fill: false
         }]
       },
