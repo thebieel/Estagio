@@ -23,69 +23,76 @@
       scrollbar-color: #4b5563 #1f2937;
     }
   </style>
-
 </head>
 
 <body class="bg-gray-400 text-black font-sans">
-  <div class="grid grid-cols-1 md:grid-cols-2 md:grid-rows-2 gap-4 p-4 h-screen overflow-auto">
+  <!-- Sidebar -->
+  <div class="fixed top-0 left-0 h-full w-60 bg-gray-800 text-white flex flex-col p-4 shadow-lg z-10">
+    <h1 class="text-2xl font-bold mb-6">Painel de Controle</h1>
+    <nav class="flex flex-col gap-4">
+      <a href="#" class="hover:text-blue-300">Dashboard</a>
+      <a href="#" class="hover:text-blue-300">Relatórios</a>
+      <a href="#" class="hover:text-blue-300">Equipe</a>
+      <a href="#" class="hover:text-blue-300">Configurações</a>
+    </nav>
+  </div>
+
+  <!-- Conteúdo principal -->
+  <div class="ml-60 grid grid-cols-1 md:grid-cols-2 md:grid-rows-2 gap-4 p-4 h-screen overflow-auto">
 
     <!-- Tela 1 -->
-    <div class="bg-white rounded-2xl shadow-lg p-4 overflow-y-auto max-h-[350px] scroll-light">
+    <div class="bg-white rounded-2xl shadow-lg p-4 overflow-y-auto max-h-[350px] scroll-dark">
       <h2 class="text-xl font-bold mb-2">Agendamentos vs Ligações</h2>
       <canvas id="callsChart"></canvas>
     </div>
 
-
     <!-- Tela 2 -->
-    <div class="bg-white rounded-2xl shadow-lg p-4 overflow-y-auto max-h-[350px] scroll-light">
+    <div class="bg-white rounded-2xl shadow-lg p-4 overflow-y-auto max-h-[350px] scroll-dark">
       <h2 class="text-xl font-bold mb-2">KPIs de Performance</h2>
       <canvas id="kpiChart"></canvas>
     </div>
 
-
     <!-- Tela 3 -->
-<div class="bg-white rounded-2xl shadow-lg p-4 overflow-y-auto max-h-[350px] scroll-light">
+    <div class="bg-white rounded-2xl shadow-lg p-4 overflow-y-auto max-h-[350px] scroll-dark">
       <h2 class="text-xl font-bold mb-2">Tendências e Estratégia</h2>
       <canvas id="trendChart"></canvas>
     </div>
 
-  
     <!-- Tela 4 -->
-<div class="bg-white rounded-2xl shadow-lg p-4 overflow-y-auto max-h-[350px] scroll-light">
-  <h2 class="text-xl font-bold mb-2">Agendamentos/Preferência</h2>
-  <table class="w-full text-sm table-auto">
-    <thead> 
-      <tr class="border-b">
-        <th class="text-left px-4 py-2">Profissionais:</th>
-        <th class="text-center px-4 py-2">Preferência Médico/Agenda - SIM</th>
-        <th class="text-center px-4 py-2">Preferência Médico/Agenda - NÃO</th>
-        <th class="text-center px-4 py-2">Primeira Vez - Preferência - SIM</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr class="hover:bg-gray-100">
-        <td class="text-left px-4 py-2">Pontes</td>
-        <td class="text-center px-4 py-2">35</td>
-        <td class="text-center px-4 py-2 text-green-600 font-semibold">50</td>
-        <td class="text-center px-4 py-2">4h 30m</td>
-      </tr>
-      <!-- Repetir os dados abaixo conforme necessário -->
-      <tr class="hover:bg-gray-100">
-        <td class="text-left px-4 py-2">Silva</td>
-        <td class="text-center px-4 py-2">42</td>
-        <td class="text-center px-4 py-2 text-red-600 font-semibold">50</td>
-        <td class="text-center px-4 py-2">3h 15m</td>
-      </tr>
-      <tr class="hover:bg-gray-100">
-        <td class="text-left px-4 py-2">Lima</td>
-        <td class="text-center px-4 py-2">28</td>
-        <td class="text-center px-4 py-2 text-yellow-600 font-semibold">50</td>
-        <td class="text-center px-4 py-2">2h 50m</td>
-      </tr>
-    </tbody>
-  </table>
-</div>
-</div>
+    <div class="bg-white rounded-2xl shadow-lg p-4 overflow-y-auto max-h-[350px] scroll-dark">
+      <h2 class="text-xl font-bold mb-2">Agendamentos/Preferência</h2>
+      <table class="w-full text-sm table-auto">
+        <thead> 
+          <tr class="border-b">
+            <th class="text-left px-4 py-2">Profissionais:</th>
+            <th class="text-center px-4 py-2">Preferência Médico/Agenda - SIM</th>
+            <th class="text-center px-4 py-2">Preferência Médico/Agenda - NÃO</th>
+            <th class="text-center px-4 py-2">Primeira Vez - Preferência - SIM</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="hover:bg-gray-100">
+            <td class="text-left px-4 py-2">Pontes</td>
+            <td class="text-center px-4 py-2">35</td>
+            <td class="text-center px-4 py-2 text-green-600 font-semibold">50</td>
+            <td class="text-center px-4 py-2">4h 30m</td>
+          </tr>
+          <tr class="hover:bg-gray-100">
+            <td class="text-left px-4 py-2">Silva</td>
+            <td class="text-center px-4 py-2">42</td>
+            <td class="text-center px-4 py-2 text-red-600 font-semibold">50</td>
+            <td class="text-center px-4 py-2">3h 15m</td>
+          </tr>
+          <tr class="hover:bg-gray-100">
+            <td class="text-left px-4 py-2">Lima</td>
+            <td class="text-center px-4 py-2">28</td>
+            <td class="text-center px-4 py-2 text-yellow-600 font-semibold">50</td>
+            <td class="text-center px-4 py-2">2h 50m</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
 
   <script>
     const agendamentosData = [174, 207, 157, 103, 17, 166, 47, 266, 168, 78, 4, 150, 109, 87, 52, 148, 144, 85, 72, 3, 177, 96, 75];
@@ -96,7 +103,7 @@
 
     const mediaAgendamentosArray = new Array(agendamentosData.length).fill(mediaAgendamentos);
     const mediaLigacoesArray = new Array(ligacoesData.length).fill(mediaLigacoes);
-  
+
     const ctxCalls = document.getElementById('callsChart').getContext('2d');
     new Chart(ctxCalls, {
       type: 'line',
@@ -187,22 +194,14 @@
       options: {
         responsive: true,
         scales: {
-          y: { 
-            beginAtZero: true,
-            ticks:{ color: 'black'} 
-          },
-          x: {
-            ticks:{ color: 'black' }
-          }
+          y: { beginAtZero: true, ticks:{ color: 'black'} },
+          x: { ticks:{ color: 'black' } }
         },
         plugins: {
-          legend: {
-            labels: {
-              color: 'black'
-            }
-          }
+          legend: { labels: { color: 'black' } }
         }
-     }});
+      }
+    });
 
     const ctxTrend = document.getElementById('trendChart').getContext('2d');
     new Chart(ctxTrend, {
@@ -216,9 +215,7 @@
           fill: false
         }]
       },
-      options: {
-        responsive: true
-      }
+      options: { responsive: true }
     });
   </script>
 </body>

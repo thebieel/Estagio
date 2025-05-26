@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Dashboard Call Center</title>
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+  <style>
+    .scroll-light::-webkit-scrollbar {
+      width: 8px;
+    }
+
+    .scroll-light::-webkit-scrollbar-track {
+      background: #f3f4f6;
+      /* Cinza claro */
+    }
+
+    .scroll-light::-webkit-scrollbar-thumb {
+      background-color: #cbd5e1;
+      /* Azul/Cinza claro */
+      border-radius: 4px;
+    }
+
+    .scroll-light {
+      scrollbar-width: thin;
+      scrollbar-color: #cbd5e1 #f3f4f6;
+    }
+
+    .sidebar-collapsed {
+      width: 64px !important;
+      overflow: hidden;
+      /* impede conteúdo vazar no colapso */
+    }
+
+    .sidebar-collapsed .nav-text,
+    .sidebar-collapsed .title {
+      display: none;
+    }
+  </style>
+</head>
+
+<body class="bg-gray-100 text-black font-sans">
+  <div class="flex h-screen overflow-hidden">
+    <!-- Sidebar -->
+    <aside id="sidebar" class="bg-white w-64 p-4 border-r transition-all duration-300 ease-in-out flex flex-col">
+      <div class="flex justify-end mb-6">
+        <button id="toggleBtn" class="text-gray-700 hover:text-black focus:outline-none">
+          <svg id="menuIcon" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
+            stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+          </svg>
+        </button>
+      </div>
+      <h2 class="title text-xl font-bold mb-6">Dashboard</h2>
+      <nav class="space-y-2">
+        <a href="#" class="flex items-center px-4 py-2 rounded hover:bg-gray-200">
+          <span class="material-icons">dashboard</span>
+          <span class="nav-text ml-2">Visão Geral</span>
+        </a>
+        <a href="#" class="flex items-center px-4 py-2 rounded hover:bg-gray-200">
+          <span class="material-icons">bar_chart</span>
+          <span class="nav-text ml-2">Relatórios</span>
+        </a>
+        <a href="#" class="flex items-center px-4 py-2 rounded hover:bg-gray-200">
+          <span class="material-icons">settings</span>
+          <span class="nav-text ml-2">Configurações</span>
+        </a>
+      </nav>
+    </aside>
+
+    <!-- Conteúdo principal -->
+    <div id="contentArea" class="flex-1 flex flex-col overflow-auto">
+      <header class="flex items-center justify-between bg-white p-4 shadow">
+        <h1 class="text-xl font-semibold">Painel de Controle</h1>
+      </header>
+
+      <main class="flex-1 p-6 overflow-auto scroll-light">
+        <div class="grid grid-cols-1 md:grid-cols-2 md:grid-rows-2 gap-4">
+          <div class="bg-white rounded-2xl shadow-lg p-4 max-h-[350px] overflow-y-auto">
+            <h2 class="text-xl font-bold mb-2">Agendamentos vs Ligações</h2>
+            <canvas id="callsChart"></canvas>
+          </div>
+
+          <!-- Gráfico Gaussiano no lugar do KPI -->
+          <div class="bg-white rounded-2xl shadow-lg p-4 max-h-[350px] overflow-y-auto">
+            <h2 class="text-xl font-bold mb-2">Distribuição Gaussiana do Tempo</h2>
+            <canvas id="gaussianChart"></canvas>
+          </div>
+
+          <div class="bg-white rounded-2xl shadow-lg p-4 max-h-[350px] overflow-y-auto">
+            <h2 class="text-xl font-bold mb-2">Tendências e Estratégia</h2>
+            <canvas id="trendChart"></canvas>
+          </div>
+
+          <div class="bg-white rounded-2xl shadow-lg p-4 max-h-[350px] overflow-y-auto">
+            <h2 class="text-xl font-bold mb-2">Agendamentos/Preferência</h2>
+            <table class="w-full text-sm table-auto">
+              <thead>
+                <tr class="border-b">
+                  <th class="text-left px-4 py-2">Profissionais:</th>
+                  <th class="text-center px-4 py-2">Preferência Médico/Agenda - SIM</th>
+                  <th class="text-center px-4 py-2">Preferência Médico/Agenda - NÃO</th>
+                  <th class="text-center px-4 py-2">Primeira Vez - Preferência - SIM</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr class="hover:bg-gray-100">
+                  <td class="text-left px-4 py-2">Pontes</td>
+                  <td class="text-center px-4 py-2">35</td>
+                  <td class="text-center px-4 py-2 text-green-600 font-semibold">50</td>
+                  <td class="text-center px-4 py-2">4h 30m</td>
+                </tr>
+                <tr class="hover:bg-gray-100">
+                  <td class="text-left px-4 py-2">Silva</td>
+                  <td class="text-center px-4 py-2">42</td>
+                  <td class="text-center px-4 py-2 text-red-600 font-semibold">50</td>
+                  <td class="text-center px-4 py-2">3h 15m</td>
+                </tr>
+                <tr class="hover:bg-gray-100">
+                  <td class="text-left px-4 py-2">Lima</td>
+                  <td class="text-center px-4 py-2">28</td>
+                  <td class="text-center px-4 py-2 text-yellow-600 font-semibold">50</td>
+                  <td class="text-center px-4 py-2">2h 50m</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <script>
+    const sidebar = document.getElementById('sidebar');
+    const toggleBtn = document.getElementById('toggleBtn');
+    const contentArea = document.getElementById('contentArea');
+
+    toggleBtn.addEventListener('click', () => {
+      sidebar.classList.toggle('sidebar-collapsed');
+
+      if (sidebar.classList.contains('sidebar-collapsed')) {
+        contentArea.classList.add('no-scroll');
+      } else {
+        contentArea.classList.remove('no-scroll');
+      }
+    });
+
+    // Dados do gráfico Agendamentos vs Ligações
+    const agendamentosData = [174, 207, 157, 103, 17, 166, 47, 266, 168, 78, 4, 150, 109, 87, 52, 148, 144, 85, 72, 3, 177, 96, 75];
+    const ligacoesData = [203, 207, 181, 150, 25, 370, 166, 334, 246, 152, 10, 319, 209, 182, 104, 336, 351, 207, 154, 15, 320, 187, 203];
+
+    const mediaAgendamentos = agendamentosData.reduce((a, b) => a + b, 0) / agendamentosData.length;
+    const mediaLigacoes = ligacoesData.reduce((a, b) => a + b, 0) / ligacoesData.length;
+
+    const mediaAgendamentosArray = new Array(agendamentosData.length).fill(mediaAgendamentos);
+    const mediaLigacoesArray = new Array(ligacoesData.length).fill(mediaLigacoes);
+
+    new Chart(document.getElementById('callsChart').getContext('2d'), {
+      type: 'line',
+      data: {
+        labels: ['01-04-25', '02-04-25', '03-04-25', '04-04-25', '05-04-25', '07-04-25', '08-04-25', '09-04-25', '10-04-25', '11-04-25', '12-04-25', '14-04-25', '15-04-25', '16-04-25', '17-04-25', '18-04-25', '19-04-25', '20-04-25', '21-04-25', '22-04-25', '23-04-25', '24-04-25', '25-04-25'],
+        datasets: [
+          {
+            label: 'Agendamentos',
+            data: agendamentosData,
+            borderColor: '#2563EB',
+            backgroundColor: '#2563EB',
+            tension: 0.3,
+            fill: false
+          },
+          {
+            label: 'Ligações',
+            data: ligacoesData,
+            borderColor: '#F59E0B',
+            backgroundColor: '#F59E0B',
+            tension: 0.3,
+            fill: false
+          },
+          {
+            label: 'Média Agendamentos',
+            data: mediaAgendamentosArray,
+            borderColor: '#3B82F6',
+            borderDash: [6, 6],
+            fill: false,
+            pointRadius: 0
+          },
+          {
+            label: 'Média Ligações',
+            data: mediaLigacoesArray,
+            borderColor: '#FBBF24',
+            borderDash: [6, 6],
+            fill: false,
+            pointRadius: 0
+          }
+        ]
+      },
+      options: {
+        responsive: true,
+        interaction: {
+          mode: 'index',
+          intersect: false,
+        },
+        stacked: false,
+        plugins: {
+          legend: { labels: { color: 'black' } },
+          tooltip: { mode: 'index', intersect: false }
+        },
+        scales: {
+          x: {
+            ticks: { color: 'black' },
+            grid: { color: '#eee' }
+          },
+          y: {
+            ticks: { color: 'black' },
+            grid: { color: '#eee' }
+          }
+        }
+      }
+    });
+
+    // --- Gráfico Gaussiano de Tempo vs Ligações ---
+    const ctxGaussian = document.getElementById('gaussianChart').getContext('2d');
+
+    const totalLigacoes = 4828;
+    const quartis = {
+      Q1: 1182,
+      Q2: 1228,
+      Q3: 1211,
+      Q4: 1207
+    };
+
+    // Média e desvio padrão aproximado dos tempos
+    const mediaTempo = (quartis.Q1 + quartis.Q2 + quartis.Q3 + quartis.Q4) / 4;
+    const desvioPadraoTempo = Math.abs(quartis.Q3 - quartis.Q1) / 1.35;
+
+    // Gerar dados simulados para o gráfico
+    const pontos = 100;
+    const dataGaussian = [];
+    for (let i = 0; i <= pontos; i++) {
+      const ligacoes = (totalLigacoes / pontos) * i;
+      // Simula variação do tempo, para efeito visual, senoidal em torno da média
+      const tempo = mediaTempo + desvioPadraoTempo * Math.sin((i / pontos) * Math.PI * 2);
+      dataGaussian.push({ x: ligacoes, y: tempo });
+    }
+
+    new Chart(ctxGaussian, {
+      type: 'scatter',
+      data: {
+        datasets: [
+          {
+            label: 'Tempo em segundos vs Ligações',
+            data: dataGaussian,
+            borderColor: 'blue',
+            backgroundColor: 'blue',
+            showLine: true,
+            fill: false,
+            tension: 0.3,
+            pointRadius: 3
+          },
+          {
+            label: 'Q1',
+            data: [{ x: totalLigacoes * 0.25, y: 1100 }, { x: totalLigacoes * 0.25, y: 1300 }],
+            borderColor: 'red',
+            borderWidth: 2,
+            type: 'line',
+            fill: false,
+            
+            pointRadius: 0,
+            borderDash: [5, 5],
+            showLine: true,
+            order: 0,
+          },
+          {
+            label: 'Q2 (Mediana)',
+            data: [{ x: totalLigacoes * 0.50, y: 1100 }, { x: totalLigacoes * 0.50, y: 1300 }],
+            borderColor: 'green',
+            borderWidth: 2,
+            type: 'line',
+            fill: false,
+            pointRadius: 0,
+            borderDash: [5, 5],
+            showLine: true,
+            order: 0,
+          },
+          {
+            label: 'Q3',
+            data: [{ x: totalLigacoes * 0.75, y: 1100 }, { x: totalLigacoes * 0.75, y: 1300 }],
+            borderColor: 'orange',
+            borderWidth: 2,
+            type: 'line',
+            fill: false,
+            pointRadius: 0,
+            borderDash: [5, 5],
+            showLine: true,
+            order: 0,
+          }
+        ]
+      },
+      options: {
+        responsive: true,
+        parsing: false,
+        scales: {
+          x: {
+            type: 'linear',
+            position: 'bottom',
+            title: {
+              display: true,
+              text: 'Quantidade de Ligações',
+              font: { size: 14, weight: 'bold' }
+            },
+            min: 0,
+            max: totalLigacoes,
+            ticks: {
+              stepSize: 500,
+              color: 'black'
+            },
+            grid: {
+              color: '#eee'
+            }
+          },
+          y: {
+            title: {
+              display: true,
+              text: 'Tempo em segundos',
+              font: { size: 14, weight: 'bold' }
+            },
+            min: 1100,
+            max: 1300,
+            ticks: {
+              color: 'black'
+            },
+            grid: {
+              color: '#eee'
+            }
+          }
+        },
+        plugins: {
+          legend: {
+            labels: {
+              color: 'black'
+            }
+          },
+          tooltip: {
+            callbacks: {
+              label: ctx => {
+                if (typeof ctx.raw === 'object' && ctx.raw !== null) {
+                  return `${ctx.dataset.label}: (${ctx.raw.x.toFixed(0)}, ${ctx.raw.y.toFixed(0)})`;
+                }
+                return ctx.dataset.label;
+              }
+            }
+          }
+        }
+      }
+    });
+
+    // --- Gráfico Tendências e Estratégia (Exemplo) ---
+    const ctxTrend = document.getElementById('trendChart').getContext('2d');
+    new Chart(ctxTrend, {
+      type: 'bar',
+      data: {
+        labels: ['Tendência A', 'Tendência B', 'Tendência C'],
+        datasets: [{
+          label: 'Valor',
+          data: [40, 55, 75],
+          backgroundColor: ['#2563EB', '#F59E0B', '#10B981']
+        }]
+      },
+      options: {
+        responsive: true,
+        scales: {
+          y: { beginAtZero: true },
+          x: {}
+        },
+        plugins: {
+          legend: { display: false }
+        }
+      }
+    });
+  </script>
+</body>
+
+</html>
