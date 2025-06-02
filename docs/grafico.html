@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Gráfico de Preferência por Médico</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    body {
+      font-family: sans-serif;
+      padding: 2rem;
+      background: #f9fafb;
+    }
+
+    h2 {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+
+    .grafico-container {
+      width: 100%;
+      overflow-x: auto;
+    }
+
+    canvas {
+      min-width: 1400px;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>Preferência de Pacientes por Médico</h2>
+  <div class="grafico-container">
+    <canvas id="graficoPreferencia"></canvas>
+  </div>
+
+  <script>
+    const ctx = document.getElementById('graficoPreferencia').getContext('2d');
+    const grafico = new Chart(ctx, {
+      type: 'bar',
+      data: {
+        labels: [
+          'Dr. João', 'Dra. Ana', 'Dr. Carlos', 'Dra. Luiza', 'Dr. Bruno',
+          'Dra. Paula', 'Dr. Marcos', 'Dra. Helena', 'Dr. Felipe', 'Dra. Camila',
+          'Dr. Gustavo', 'Dra. Renata', 'Dr. Rafael', 'Dra. Bianca', 'Dr. André',
+          'Dra. Sônia', 'Dr. Lucas', 'Dra. Marina', 'Dr. Eduardo'
+        ],
+        datasets: [
+          {
+            label: 'Preferência SIM',
+            data: [25, 30, 18, 22, 19, 27, 15, 20, 23, 17, 24, 21, 19, 26, 22, 28, 18, 20, 16],
+            backgroundColor: '#4ade80'
+          },
+          {
+            label: 'Preferência NÃO',
+            data: [10, 5, 12, 8, 14, 9, 11, 6, 7, 10, 13, 8, 6, 7, 9, 11, 10, 5, 8],
+            backgroundColor: '#60a5fa'
+          },
+          {
+            label: 'Primeira vez - Preferência SIM',
+            data: [8, 12, 5, 9, 6, 10, 4, 7, 8, 5, 9, 6, 7, 10, 8, 9, 6, 5, 7],
+            backgroundColor: '#facc15'
+          }
+        ]
+      },
+      options: {
+        responsive: true,
+        plugins: {
+          legend: {
+            position: 'top',
+          },
+          title: {
+            display: true,
+            text: 'Comportamento de Agendamento por Médico (19 Profissionais)'
+          }
+        },
+        scales: {
+          y: {
+            beginAtZero: true,
+            title: {
+              display: true,
+              text: 'Número de Pacientes'
+            }
+          }
+        }
+      }
+    });
+  </script>
+
+</body>
+</html>

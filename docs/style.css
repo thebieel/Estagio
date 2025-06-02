@@ -1,0 +1,30 @@
+.scroll-light::-webkit-scrollbar {
+    width: 8px;
+    }
+
+.scroll-light::-webkit-scrollbar-track {
+    background: #f3f4f6;
+    /* Cinza claro */
+    }
+
+.scroll-light::-webkit-scrollbar-thumb {
+    background-color: #cbd5e1;
+    /* Azul/Cinza claro */
+    border-radius: 4px;
+    }
+
+.scroll-light {
+    scrollbar-width: thin;
+    scrollbar-color: #cbd5e1 #f3f4f6;
+    }
+
+.sidebar-collapsed {
+    width: 64px !important;
+    overflow: hidden;  
+    /* impede conteúdo vazar no colapso */
+}
+
+.sidebar-collapsed .nav-text,
+.sidebar-collapsed .title {
+    display: none;
+}
