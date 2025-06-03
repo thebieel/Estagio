@@ -20,6 +20,8 @@
         }
       }
     }
+    src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels"
+
   </script>
 
   <!-- Tailwind CSS -->
@@ -62,11 +64,11 @@
 
     <!-- Conteúdo principal -->
     <div id="contentArea" class="flex-1 flex flex-col overflow-auto">
-      <header class="flex items-center justify-between bg-white p-4 shadow">
-        <h1 class="text-xl font-semibold">Painel de Controle</h1>
+      <header class="flex items-center justify-between bg-blue-100 p-4 shadow"> <!-- header call center-->
+        <h1 class="text-xl font-semibold">Call Center</h1>
       </header>
 
-      <main class="flex-1 p-6 bg-gray-50 overflow-auto scroll-light rounded-tl-3xl">
+      <main class="flex-1 p-6 bg-gray-50 overflow-auto scroll-light"> <!-- fundo da tela-->
         <div class="grid grid-cols-1 md:grid-cols-2 md:grid-rows-2 gap-4">
           <div class="bg-gray-200 rounded-2xl shadow-lg transition-all hover:shadow-xl hover:scale-[1.02] cursor-pointer p-4 max-h-[350px] overflow-y-auto">
             <h2 class="text-xl font-bold mb-2">Agendamentos vs Ligações</h2>
@@ -75,23 +77,50 @@
 
           <!-- Gráfico Gaussiano no lugar do KPI -->
           <div class="bg-gray-200 rounded-2xl shadow-lg p-6 transition-all hover:shadow-xl hover:scale-[1.02] cursor-pointer max-h-[350px] overflow-y-auto">
-            <h2 class="text-xl font-bold mb-2">Distribuição Gaussiana do Tempo</h2>
+            <h2 class="text-xl font-bold mb-2">Distribuição Gaussiana do Tempo de Espera</h2>
             <canvas id="gaussianChart"></canvas>
           </div>
 
-          <div class="bg-gray-200 rounded-2xl shadow-lg transition-all hover:shadow-xl hover:scale-[1.02] cursor-pointer p-4 max-h-[350px] overflow-y-auto">
+          <div class="bg-gray-200 rounded-2xl shadow-lg transition-all hover:shadow-xl hover:ring-2 hover:scale-[1.01] cursor-pointer p-4 max-h-[350px] overflow-y-auto will-change-transform">
             <h2 class="text-xl font-bold mb-2">Tendências e Estratégia</h2>
             <canvas id="trendChart"></canvas>
           </div>
 
-          <div class="bg-gray-200 rounded-2xl shadow-lg transition-all hover:shadow-xl hover:scale-[1.02] cursor-pointer p-4 max-h-[350px] overflow-hidden">
-            <h2 class="text-xl font-bold mb-4">Preferência de Pacientes por Médico</h2>
 
-            <div class="overflow-x-auto">
-              <canvas id="graficoPreferencia" class="min-w-[700px] h-[300px]"></canvas>
-            </div>
+          <div class="bg-gray-200 rounded-2xl shadow-lg transition-all hover:shadow-xl hover:scale-[1.02] cursor-pointer p-4 overflow-y-auto scroll-dark">
+            <h2 class="text-xl font-bold mb-2">Agendamentos/Preferência</h2>
+            <table class="w-full text-sm table-auto">
+              <thead> 
+                <tr class="border-b">
+                  <th class="text-left px-4 py-2">Profissionais:</th>
+                  <th class="text-center px-4 py-2">Preferência Médico - SIM</th>
+                  <th class="text-center px-4 py-2">Preferência Médico - NÃO</th>
+                  <th class="text-center px-4 py-2">Primeira Vez - Preferência - SIM</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr class="hover:bg-gray-100">
+                  <td class="text-left px-4 py-2">Pontes</td>
+                  <td class="text-center px-4 py-2 text-green-600 font-semibold">10</td>
+                  <td class="text-center px-4 py-2 text-red-600 font-semibold">15</td>
+                  <td class="text-center px-4 py-2 text-yellow-600 font-semibold">5</td>
+                </tr>
+                <tr class="hover:bg-gray-100">
+                  <td class="text-left px-4 py-2">Pontes</td>
+                  <td class="text-center px-4 py-2 text-green-600 font-semibold">20</td>
+                  <td class="text-center px-4 py-2 text-red-600 font-semibold">25</td>
+                  <td class="text-center px-4 py-2 text-yellow-600 font-semibold">5</td>
+                </tr>
+                <tr class="hover:bg-gray-100">
+                  <td class="text-left px-4 py-2">Pontes</td>
+                  <td class="text-center px-4 py-2 text-green-600 font-semibold">30</td>
+                  <td class="text-center px-4 py-2 text-red-600 font-semibold">35</td>
+                  <td class="text-center px-4 py-2 text-yellow-600 font-semibold">5</td>
+                </tr>
+              </tbody>
+            </table>
           </div>
-        </div>
+  </div>
       </main>
     </div>
   </div>
@@ -124,7 +153,7 @@
     new Chart(document.getElementById('callsChart').getContext('2d'), {
       type: 'line',
       data: {
-        labels: ['01-04-25', '02-04-25', '03-04-25', '04-04-25', '05-04-25', '07-04-25', '08-04-25', '09-04-25', '10-04-25', '11-04-25', '12-04-25', '14-04-25', '15-04-25', '16-04-25', '17-04-25', '18-04-25', '19-04-25', '20-04-25', '21-04-25', '22-04-25', '23-04-25', '24-04-25', '25-04-25'],
+        labels: ['01/04/25', '02/04/25', '03/04/25', '04/04/25', '05/04/25', '07/04/25', '08/04/25', '09/04/25', '10/04/25', '11/04/25', '12/04/25', '14/04/25', '15/04/25', '16/04/25', '17/04/25', '18/04/25', '19/04/25', '20/04/25', '21/04/25', '22/04/25', '23/04/25', '24/04/25', '25/04/25'],
         datasets: [
           {
             label: 'Agendamentos',
@@ -260,48 +289,7 @@
       }
     });
 
-    // Gráfico Preferência de Pacientes por Médico (barras agrupadas)
-const ctx = document.getElementById('graficoPreferencia').getContext('2d');
-
-const data = {
-  labels: ['Janeiro', 'Fevereiro', 'Março', 'Abril'],
-  datasets: [
-    {
-      label: 'Vendas 2023',
-      data: [50, 60, 70, 90],
-      backgroundColor: 'rgba(54, 162, 235, 0.7)',
-      borderColor: 'rgba(54, 162, 235, 1)',
-      borderWidth: 1,
-    },
-    {
-      label: 'Vendas 2024',
-      data: [80, 55, 40, 95],
-      backgroundColor: 'rgba(255, 99, 132, 0.7)',
-      borderColor: 'rgba(255, 99, 132, 1)',
-      borderWidth: 1,
-    },
-  ],
-};
-
-const config = {
-  type: 'bar',
-  data: data,
-  options: {
-    responsive: true,
-    scales: {
-      x: {
-        stacked: false, // Define que barras serão agrupadas, não empilhadas
-      },
-      y: {
-        beginAtZero: true,
-      },
-    },
-  },
-};
-
-const barGroupedChart = new Chart(ctx, config);
-
-
+    
 </script>
 </body>
 
