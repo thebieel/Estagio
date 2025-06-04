@@ -19,12 +19,23 @@
     }
 
 .sidebar-collapsed {
-    width: 64px !important;
+    width: 4rem !important;
     overflow: hidden;  
     /* impede conteúdo vazar no colapso */
 }
 
+
 .sidebar-collapsed .nav-text,
 .sidebar-collapsed .title {
     display: none;
+}
+
+.sidebar-link {
+  justify-content: flex-start;
+  padding-left: 1rem;
+}
+
+.sidebar-collapsed .sidebar-link {
+  justify-content: center;
+  padding-left: 0;
 }

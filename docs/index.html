@@ -37,7 +37,7 @@
   <div class="flex h-screen overflow-hidden">
     <!-- Sidebar -->
     <aside id="sidebar" class="bg-white w-64 p-4 border-r transition-all duration-300 ease-in-out flex flex-col">
-      <div class="flex justify-end mb-6">
+      <div class="flex justify-center mb-6">
         <button id="toggleBtn" class="text-gray-700 hover:text-black focus:outline-none">
           <svg id="menuIcon" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
             stroke="currentColor">
@@ -46,16 +46,17 @@
         </button>
       </div>
       <h2 class="title text-xl font-bold mb-6">Dashboard</h2>
-      <nav class="space-y-2">
-        <a href="#" class="flex items-center px-4 py-2 rounded hover:bg-gray-200">
+      
+      <nav class="space-y-2 flex flex-col items-center">
+        <a href="#" class="sidebar-link flex items-center py-2 rounded hover:bg-gray-200 w-full transition-all duration-200">
           <span class="material-icons">dashboard</span>
           <span class="nav-text ml-2">Visão Geral</span>
         </a>
-        <a href="#" class="flex items-center px-4 py-2 rounded hover:bg-gray-200">
+        <a href="#" class="sidebar-link flex items-center py-2 rounded hover:bg-gray-200 w-full transition-all duration-200">
           <span class="material-icons">bar_chart</span>
           <span class="nav-text ml-2">Relatórios</span>
         </a>
-        <a href="#" class="flex items-center px-4 py-2 rounded hover:bg-gray-200">
+        <a href="#" class="sidebar-link flex items-center py-2 rounded hover:bg-gray-200 w-full transition-all duration-200">
           <span class="material-icons">settings</span>
           <span class="nav-text ml-2">Configurações</span>
         </a>
@@ -89,6 +90,7 @@
 
           <div class="bg-gray-200 rounded-2xl shadow-lg transition-all hover:shadow-xl hover:scale-[1.02] cursor-pointer p-4 overflow-y-auto scroll-dark">
             <h2 class="text-xl font-bold mb-2">Agendamentos/Preferência</h2>
+            <div class="overflow-y-auto max-h-[250px]">
             <table class="w-full text-sm table-auto">
               <thead> 
                 <tr class="border-b">
@@ -100,27 +102,145 @@
               </thead>
               <tbody>
                 <tr class="hover:bg-gray-100">
-                  <td class="text-left px-4 py-2">Pontes</td>
+                  <td class="text-left px-4 py-2">Dr. Álvaro/C&R</td>
                   <td class="text-center px-4 py-2 text-green-600 font-semibold">10</td>
                   <td class="text-center px-4 py-2 text-red-600 font-semibold">15</td>
                   <td class="text-center px-4 py-2 text-yellow-600 font-semibold">5</td>
                 </tr>
                 <tr class="hover:bg-gray-100">
-                  <td class="text-left px-4 py-2">Pontes</td>
+                  <td class="text-left px-4 py-2">Dr. Á.Valeda</td>
                   <td class="text-center px-4 py-2 text-green-600 font-semibold">20</td>
                   <td class="text-center px-4 py-2 text-red-600 font-semibold">25</td>
                   <td class="text-center px-4 py-2 text-yellow-600 font-semibold">5</td>
                 </tr>
                 <tr class="hover:bg-gray-100">
-                  <td class="text-left px-4 py-2">Pontes</td>
+                  <td class="text-left px-4 py-2">Dr. Álvaro </td>
                   <td class="text-center px-4 py-2 text-green-600 font-semibold">30</td>
                   <td class="text-center px-4 py-2 text-red-600 font-semibold">35</td>
                   <td class="text-center px-4 py-2 text-yellow-600 font-semibold">5</td>
                 </tr>
+                <tr class="hover:bg-gray-100">
+                  <td class="text-left px-4 py-2">Dra. Ângela</td>
+                  <td class="text-center px-4 py-2 text-green-600 font-semibold">30</td>
+                  <td class="text-center px-4 py-2 text-red-600 font-semibold">35</td>
+                  <td class="text-center px-4 py-2 text-yellow-600 font-semibold">5</td>
+                </tr>
+                <tr class="hover:bg-gray-100">
+                  <td class="text-left px-4 py-2">Dra. Beatriz</td>
+                  <td class="text-center px-4 py-2 text-green-600 font-semibold">30</td>
+                  <td class="text-center px-4 py-2 text-red-600 font-semibold">35</td>
+                  <td class="text-center px-4 py-2 text-yellow-600 font-semibold">5</td>
+                </tr>
+                <tr class="hover:bg-gray-100">
+                  <td class="text-left px-4 py-2">Dra. Carla</td>
+                  <td class="text-center px-4 py-2 text-green-600 font-semibold">30</td>
+                  <td class="text-center px-4 py-2 text-red-600 font-semibold">35</td>
+                  <td class="text-center px-4 py-2 text-yellow-600 font-semibold">5</td>
+                </tr>
+                <tr class="hover:bg-gray-100">
+                  <td class="text-left px-4 py-2">Dr. Carlos</td>
+                  <td class="text-center px-4 py-2 text-green-600 font-semibold">30</td>
+                  <td class="text-center px-4 py-2 text-red-600 font-semibold">35</td>
+                  <td class="text-center px-4 py-2 text-yellow-600 font-semibold">5</td>
+                </tr>
+                <tr class="hover:bg-gray-100">
+                  <td class="text-left px-4 py-2">Dra. Christiana</td>
+                  <td class="text-center px-4 py-2 text-green-600 font-semibold">30</td>
+                  <td class="text-center px-4 py-2 text-red-600 font-semibold">35</td>
+                  <td class="text-center px-4 py-2 text-yellow-600 font-semibold">5</td>
+                </tr>
+                <tr class="hover:bg-gray-100">
+                  <td class="text-left px-4 py-2">Dr. Diego</td>
+                  <td class="text-center px-4 py-2 text-green-600 font-semibold">30</td>
+                  <td class="text-center px-4 py-2 text-red-600 font-semibold">35</td>
+                  <td class="text-center px-4 py-2 text-yellow-600 font-semibold">5</td>
+                </tr>
+                <tr class="hover:bg-gray-100">
+                  <td class="text-left px-4 py-2">Dra. Eliana</td>
+                  <td class="text-center px-4 py-2 text-green-600 font-semibold">30</td>
+                  <td class="text-center px-4 py-2 text-red-600 font-semibold">35</td>
+                  <td class="text-center px-4 py-2 text-yellow-600 font-semibold">5</td>
+                </tr>
+                <tr class="hover:bg-gray-100">
+                  <td class="text-left px-4 py-2">Dr. Fábio</td>
+                  <td class="text-center px-4 py-2 text-green-600 font-semibold">30</td>
+                  <td class="text-center px-4 py-2 text-red-600 font-semibold">35</td>
+                  <td class="text-center px-4 py-2 text-yellow-600 font-semibold">5</td>
+                </tr>
+                <tr class="hover:bg-gray-100">
+                  <td class="text-left px-4 py-2">Dra. Farida</td>
+                  <td class="text-center px-4 py-2 text-green-600 font-semibold">30</td>
+                  <td class="text-center px-4 py-2 text-red-600 font-semibold">35</td>
+                  <td class="text-center px-4 py-2 text-yellow-600 font-semibold">5</td>
+                </tr>
+                <tr class="hover:bg-gray-100">
+                  <td class="text-left px-4 py-2">Dr. Gustavo</td>
+                  <td class="text-center px-4 py-2 text-green-600 font-semibold">30</td>
+                  <td class="text-center px-4 py-2 text-red-600 font-semibold">35</td>
+                  <td class="text-center px-4 py-2 text-yellow-600 font-semibold">5</td>
+                </tr>
+                <tr class="hover:bg-gray-100">
+                  <td class="text-left px-4 py-2">Dr. Janio/Yag</td>
+                  <td class="text-center px-4 py-2 text-green-600 font-semibold">30</td>
+                  <td class="text-center px-4 py-2 text-red-600 font-semibold">35</td>
+                  <td class="text-center px-4 py-2 text-yellow-600 font-semibold">5</td>
+                </tr>
+                <tr class="hover:bg-gray-100">
+                  <td class="text-left px-4 py-2">Dr. J. Carneiro</td>
+                  <td class="text-center px-4 py-2 text-green-600 font-semibold">30</td>
+                  <td class="text-center px-4 py-2 text-red-600 font-semibold">35</td>
+                  <td class="text-center px-4 py-2 text-yellow-600 font-semibold">5</td>
+                </tr>
+                <tr class="hover:bg-gray-100">
+                  <td class="text-left px-4 py-2">Dra. Louize</td>
+                  <td class="text-center px-4 py-2 text-green-600 font-semibold">30</td>
+                  <td class="text-center px-4 py-2 text-red-600 font-semibold">35</td>
+                  <td class="text-center px-4 py-2 text-yellow-600 font-semibold">5</td>
+                </tr>
+                <tr class="hover:bg-gray-100">
+                  <td class="text-left px-4 py-2">Dr. Moisés</td>
+                  <td class="text-center px-4 py-2 text-green-600 font-semibold">30</td>
+                  <td class="text-center px-4 py-2 text-red-600 font-semibold">35</td>
+                  <td class="text-center px-4 py-2 text-yellow-600 font-semibold">5</td>
+                </tr>
+                <tr class="hover:bg-gray-100">
+                  <td class="text-left px-4 py-2">Dra. Priscila</td>
+                  <td class="text-center px-4 py-2 text-green-600 font-semibold">30</td>
+                  <td class="text-center px-4 py-2 text-red-600 font-semibold">35</td>
+                  <td class="text-center px-4 py-2 text-yellow-600 font-semibold">5</td>
+                </tr>
+                <tr class="hover:bg-gray-100">
+                  <td class="text-left px-4 py-2">Dr. Ricardo</td>
+                  <td class="text-center px-4 py-2 text-green-600 font-semibold">30</td>
+                  <td class="text-center px-4 py-2 text-red-600 font-semibold">35</td>
+                  <td class="text-center px-4 py-2 text-yellow-600 font-semibold">5</td>
+                </tr>
+                <tr class="hover:bg-gray-100">
+                  <td class="text-left px-4 py-2">Dr. Rodrigo</td>
+                  <td class="text-center px-4 py-2 text-green-600 font-semibold">30</td>
+                  <td class="text-center px-4 py-2 text-red-600 font-semibold">35</td>
+                  <td class="text-center px-4 py-2 text-yellow-600 font-semibold">5</td>
+                </tr>
+                <tr class="hover:bg-gray-100">
+                  <td class="text-left px-4 py-2">Dra. Tatiana</td>
+                  <td class="text-center px-4 py-2 text-green-600 font-semibold">30</td>
+                  <td class="text-center px-4 py-2 text-red-600 font-semibold">35</td>
+                  <td class="text-center px-4 py-2 text-yellow-600 font-semibold">5</td>
+                </tr>
+                <tr class="hover:bg-gray-100">
+                  <td class="text-left px-4 py-2">Dr. Vinicius</td>
+                  <td class="text-center px-4 py-2 text-green-600 font-semibold">30</td>
+                  <td class="text-center px-4 py-2 text-red-600 font-semibold">35</td>
+                  <td class="text-center px-4 py-2 text-yellow-600 font-semibold">5</td>
+                </tr>
+
+
+                
               </tbody>
             </table>
           </div>
-  </div>
+          </div>
+          </div>
       </main>
     </div>
   </div>
