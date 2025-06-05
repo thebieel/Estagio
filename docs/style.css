@@ -39,3 +39,12 @@
   justify-content: center;
   padding-left: 0;
 }
+#sidebar {
+  background-color: #3131326e;
+  border-radius: 1rem;
+  height: 97%;
+  width: 15%;
+  margin: auto;
+  margin-left: 1rem;
+  /* Azul/Cinza claro */
+}
