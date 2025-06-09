@@ -4,12 +4,10 @@
 
 .scroll-light::-webkit-scrollbar-track {
     background: #f3f4f6;
-    /* Cinza claro */
     }
 
 .scroll-light::-webkit-scrollbar-thumb {
     background-color: #cbd5e1;
-    /* Azul/Cinza claro */
     border-radius: 4px;
     }
 
@@ -21,9 +19,7 @@
 .sidebar-collapsed {
     width: 4rem !important;
     overflow: hidden;  
-    /* impede conteúdo vazar no colapso */
 }
-
 
 .sidebar-collapsed .nav-text,
 .sidebar-collapsed .title {
@@ -46,8 +42,8 @@
   height: 100%;
   width: 15%;
   margin: auto;
-  /* Azul/Cinza claro */
 }
+
 .sidebar-collapsed .menu-toggle-row {
   padding-left: 0 !important;
   justify-content: center !important;
