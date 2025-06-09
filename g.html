@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+</html>
+
+<canvas id="gaussChart"></canvas>
+
+<!-- Chart.js e plugin de anotações -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-annotation@1.4.0/dist/chartjs-plugin-annotation.min.js"></script>
+
+<script>
+  // Durações reais
+  const durations = [
+    "00:00:08", "00:00:00", "00:00:12", "00:04:08", "00:00:00", "00:02:51", "00:00:03",
+    "00:05:04", "00:00:00", "00:02:24", "00:04:06", "00:02:59", "00:02:21", "00:00:12",
+    "00:02:15", "00:04:26", "00:03:06", "00:03:32", "00:01:29", "00:00:00", "00:04:33",
+    "00:00:01", "00:07:48", "00:03:12", "00:00:00", "00:07:07", "00:04:01", "00:01:05",
+    "00:00:00", "00:01:37", "00:03:55", "00:04:13", "00:02:47", "00:00:18", "00:00:03",
+    "00:08:13", "00:04:32", "00:00:01", "00:00:37", "00:04:20", "00:02:22", "00:03:01",
+    "00:03:41", "00:01:14", "00:00:16", "00:00:07", "00:03:31", "00:01:21", "00:05:35"
+  ];
+
+  // Converter para segundos
+  const toSeconds = timeStr => {
+    const [hh, mm, ss] = timeStr.split(':').map(Number);
+    return hh * 3600 + mm * 60 + ss;
+  };
+  const callSeconds = durations.map(toSeconds);
+
+  // Média e desvio padrão
+  const mean = callSeconds.reduce((sum, val) => sum + val, 0) / callSeconds.length;
+  const stdDev = Math.sqrt(callSeconds.reduce((sum, val) => sum + Math.pow(val - mean, 2), 0) / callSeconds.length);
+
+  // Distribuição normal
+  function normalDistribution(x, mean, stdDev) {
+    return (1 / (stdDev * Math.sqrt(2 * Math.PI))) * Math.exp(-0.5 * Math.pow((x - mean) / stdDev, 2));
+  }
+
+  // Geração de pontos
+  const xValues = [];
+  const yValues = [];
+  const minX = 0;
+  const maxX = Math.ceil(mean + 3 * stdDev);
+  for (let x = minX; x <= maxX; x += 10) {
+    xValues.push(x);
+    yValues.push(normalDistribution(x, mean, stdDev));
+  }
+
+  // Formatar segundos como XmYs
+  const formatSeconds = s => {
+    const m = Math.floor(s / 60);
+    const ss = Math.floor(s % 60).toString().padStart(2, '0');
+    return `${m}m${ss}s`;
+  };
+
+  // Criar gráfico
+  new Chart(document.getElementById("gaussChart"), {
+    type: "line",
+    data: {
+      labels: xValues,
+      datasets: [{
+        label: `Distribuição das Durações (μ ≈ ${formatSeconds(mean)}, σ ≈ ${formatSeconds(stdDev)})`,
+        data: yValues.map((y, i) => ({ x: xValues[i], y })),
+        borderColor: "green",
+        backgroundColor: "rgba(0,128,0,0.1)",
+        fill: true,
+        tension: 0.4
+      }]
+    },
+    options: {
+      responsive: true,
+      plugins: {
+        tooltip: {
+          callbacks: {
+            title: (ctx) => `Tempo: ${formatSeconds(ctx[0].parsed.x)}`
+          }
+        },
+        annotation: {
+          annotations: {
+            mean: {
+              type: 'line',
+              xMin: mean,
+              xMax: mean,
+              borderColor: 'blue',
+              borderWidth: 2,
+              borderDash: [6, 6],
+              label: {
+                content: 'μ',
+                enabled: true,
+                position: 'top'
+              }
+            },
+            std1pos: {
+              type: 'line',
+              xMin: mean + stdDev,
+              xMax: mean + stdDev,
+              borderColor: 'orange',
+              borderDash: [4, 4],
+              borderWidth: 1,
+              label: {
+                content: '+1σ',
+                enabled: true,
+                position: 'top'
+              }
+            },
+            std1neg: {
+              type: 'line',
+              xMin: mean - stdDev,
+              xMax: mean - stdDev,
+              borderColor: 'orange',
+              borderDash: [4, 4],
+              borderWidth: 1,
+              label: {
+                content: '-1σ',
+                enabled: true,
+                position: 'top'
+              }
+            },
+            std2pos: {
+              type: 'line',
+              xMin: mean + 2 * stdDev,
+              xMax: mean + 2 * stdDev,
+              borderColor: 'red',
+              borderDash: [2, 4],
+              borderWidth: 1,
+              label: {
+                content: '+2σ',
+                enabled: true,
+                position: 'top'
+              }
+            },
+            std2neg: {
+              type: 'line',
+              xMin: mean - 2 * stdDev,
+              xMax: mean - 2 * stdDev,
+              borderColor: 'red',
+              borderDash: [2, 4],
+              borderWidth: 1,
+              label: {
+                content: '-2σ',
+                enabled: true,
+                position: 'top'
+              }
+            },
+            std3pos: {
+              type: 'line',
+              xMin: mean + 3 * stdDev,
+              xMax: mean + 3 * stdDev,
+              borderColor: 'purple',
+              borderDash: [2, 2],
+              borderWidth: 1,
+              label: {
+                content: '+3σ',
+                enabled: true,
+                position: 'top'
+              }
+            },
+            std3neg: {
+              type: 'line',
+              xMin: mean - 3 * stdDev,
+              xMax: mean - 3 * stdDev,
+              borderColor: 'purple',
+              borderDash: [2, 2],
+              borderWidth: 1,
+              label: {
+                content: '-3σ',
+                enabled: true,
+                position: 'top'
+              }
+            }
+          }
+        }
+      },
+      scales: {
+        x: {
+          type: 'linear',
+          min: 0,
+          title: {
+            display: true,
+            text: "Duração das Chamadas"
+          },
+          ticks: {
+            callback: value => formatSeconds(value)
+          }
+        },
+        y: {
+            min: 0,
+          title: {
+            display: true,
+            text: "Densidade"
+          },
+          beginAtZero: true
+        }
+      }
+    },
+    plugins: [Chart.registry.getPlugin('annotation')]
+  });
+</script>
