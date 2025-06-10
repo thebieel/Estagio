@@ -52,3 +52,36 @@
 .sidebar-collapsed .menu-text {
   display: none;
 }
+
+.typewriter {
+  display: inline-block;
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 1rem;
+  white-space: nowrap;
+  overflow: hidden;
+  border-right: .14em solid transparent;
+  max-width: 0;
+  animation: typing 1s steps(20, end) forwards, blink-caret .75s step-end 2;
+  position: relative;
+}
+
+/*.typewriter::after {
+  content: '';
+  position: absolute;
+  right: 0;
+  width: .14em;
+  height: 100%;
+  background: red;
+  animation: blink-caret .75s step-end 2;
+  animation-fill-mode: fowards;
+}*/
+
+@keyframes typing {
+  from { max-width: 0; }
+  to { max-width: 100vw; }
+}
+
+@keyframes blink-caret {
+  0%, 100% { border-color: transparent; }
+  50% { border-color: rgb(0, 0, 0); }
+}
