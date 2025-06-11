@@ -243,6 +243,65 @@
   </div>
 
   <script>
+
+
+  const profissionais = [
+  ["Dr. Álvaro/C&R", 20, 36, 3],
+  ["Dr. Á.Valeda", 0, 40, 0],
+  ["Dr. Álvaro", 54, 374, 6],
+  ["Dra. Ângela", 105, 143, 19],
+  ["Dra. Beatriz", 24, 77, 7],
+  ["Dra. Carla", 5, 11, 1],
+  ["Dr. Carlos", 9, 12, 2],
+  ["Dra. Christiana", 24, 164, 2],
+  ["Dra. Débora", 28, 38, 10],
+  ["Dr. Diego", 6, 41, 2],
+  ["Dra. Eliana", 5, 11, 3],
+  ["Dr. Fábio", 25, 20, 9],
+  ["Dr. Gustavo", 42, 92, 15],
+  ["Dr. Janio/Yag", 5, 17, 0],
+  ["Dr. J. Carneiro", 62, 125, 16],
+  ["Dr. Kleber", 5, 6, 2],
+  ["Dra. Louize", 17, 13, 3],
+  ["Dra. Márcia", 5, 11, 0],
+  ["Dra. Marina", 36, 33, 9],
+  ["Dr. Moisés", 50, 43, 10],
+  ["Dra. Priscila", 15, 21, 5],
+  ["Dr. Ricardo", 33, 39, 5],
+  ["Dr. Rodrigo", 26, 77, 7],
+  ["Dra. Tatiana", 71, 41, 15],
+  ["Dr. Vinicius", 19, 66, 7],
+];
+
+
+
+  const tbody = document.querySelector('table tbody');
+  tbody.innerHTML = ''; // limpa qualquer linha anterior
+
+  profissionais.forEach(([nome, sim, nao, primeira]) => {
+    const tr = document.createElement('tr');
+    tr.classList.add('hover:bg-gray-100');
+
+    tr.innerHTML = `
+      <td class="text-left px-4 py-2">${nome}</td>
+      <td class="text-center px-4 py-2 text-green-600 font-semibold">${sim}</td>
+      <td class="text-center px-4 py-2 text-red-600 font-semibold">${nao}</td>
+      <td class="text-center px-4 py-2 text-yellow-600 font-semibold">${primeira}</td>
+    `;
+
+    tbody.appendChild(tr);
+  });
+
+
+
+
+
+
+
+
+
+
+
     const sidebar = document.getElementById('sidebar');
     const toggleBtn = document.getElementById('toggleBtn');
     const contentArea = document.getElementById('contentArea');
@@ -258,8 +317,8 @@
     });
 
     // Dados Agendamentos vs Ligações
-    const agendamentosData = [174, 207, 157, 103, 17, 166, 47, 266, 168, 78, 4, 150, 109, 87, 52, 148, 144, 85, 72, 3, 177, 96, 75];
-    const ligacoesData = [203, 207, 181, 150, 25, 370, 166, 334, 246, 152, 10, 319, 209, 182, 104, 336, 351, 207, 154, 15, 320, 187, 203];
+    const agendamentosData = [0, 112, 235, 223, 187, 164, 121, 3, 0, 179, 197, 174, 191, 162, 10, 0, 226, 183, 194, 157, 141, 3, 216, 166, 130, 140, 99, 11];
+    const ligacoesData = [ 8, 149, 445, 337, 249, 261, 182, 17, 4, 392, 285, 295, 257, 222, 32, 1, 382, 277, 263, 259, 234, 19, 310, 267, 178, 192, 144, 25];
 
     const mediaAgendamentos = agendamentosData.reduce((a, b) => a + b, 0) / agendamentosData.length;
     const mediaLigacoes = ligacoesData.reduce((a, b) => a + b, 0) / ligacoesData.length;
@@ -272,7 +331,7 @@
     new Chart(document.getElementById('callsChart').getContext('2d'), {
       type: 'line',
       data: {
-        labels: ['01/04/25', '02/04/25', '03/04/25', '04/04/25', '05/04/25', '07/04/25', '08/04/25', '09/04/25', '10/04/25', '11/04/25', '12/04/25', '14/04/25', '15/04/25', '16/04/25', '17/04/25', '18/04/25', '19/04/25', '20/04/25', '21/04/25', '22/04/25', '23/04/25', '24/04/25', '25/04/25'],
+        labels: ["01/05/25", "02/05/25", "05/05/25", "06/05/25", "07/05/25", "08/05/25", "09/05/25","10/05/25", "11/05/25", "12/05/25", "13/05/25", "14/05/25", "15/05/25", "16/05/25", "17/05/25", "18/05/25", "19/05/25", "20/05/25", "21/05/25", "22/05/25", "23/05/25", "24/05/25", "26/05/25", "27/05/25", "28/05/25", "29/05/25", "30/05/25", "31/05/25"],
         datasets: [
           {
             label: 'Agendamentos',
@@ -338,7 +397,12 @@
         },
         scales: {
           x: {
-            ticks: { color: 'black' },
+            ticks: { 
+              color: 'black',
+              autoSkip: true,
+              font: { size: 12 },
+              padding: 5,
+            },
             grid: { color: '#eee' }
           },
           y: {

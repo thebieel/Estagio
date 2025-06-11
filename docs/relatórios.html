@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Dashboard com CSV</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 p-8">
+
+  <!-- Seção do Gráfico -->
+  <section class="bg-white p-6 rounded-xl shadow mb-8">
+    <h2 class="text-2xl font-bold mb-4">Gráfico - Agendamentos vs Ligações</h2>
+    <input type="file" id="csvUploadGraph" accept=".csv" class="mb-4">
+    <canvas id="lineChart" class="w-full h-64"></canvas>
+  </section>
+
+  <!-- Seção da Tabela -->
+  <section class="bg-white p-6 rounded-xl shadow">
+    <h2 class="text-2xl font-bold mb-4">Tabela - Dados CSV</h2>
+    <input type="file" id="csvUploadTable" accept=".csv" class="mb-4">
+    <div class="overflow-x-auto">
+      <table id="dataTable" class="table-auto w-full text-left border border-gray-300">
+        <thead class="bg-gray-200"></thead>
+        <tbody></tbody>
+      </table>
+    </div>
+  </section>
+
+  <script>
+    // Upload do Gráfico
+    document.getElementById('csvUploadGraph').addEventListener('change', function (e) {
+      const file = e.target.files[0];
+      if (!file) return;
+
+      Papa.parse(file, {
+        header: true,
+        skipEmptyLines: true,
+        complete: function (results) {
+          const data = results.data;
+          const labels = data.map(row => row['data']);
+          const agendamentos = data.map(row => Number(row['total(agendamentos)']));
+          const ligacoes = data.map(row => Number(row['ligações receptivas']));
+
+          if (window.lineChart) window.lineChart.destroy(); // evita sobreposição
+
+          const ctx = document.getElementById('lineChart').getContext('2d');
+          window.lineChart = new Chart(ctx, {
+            type: 'line',
+            data: {
+              labels: labels,
+              datasets: [
+                {
+                  label: 'Total de Agendamentos',
+                  data: agendamentos,
+                  borderColor: '#3b82f6',
+                  backgroundColor: '#3b82f688',
+                  tension: 0.3,
+                  fill: true
+                },
+                {
+                  label: 'Ligações Receptivas',
+                  data: ligacoes,
+                  borderColor: '#10b981',
+                  backgroundColor: '#10b98188',
+                  tension: 0.3,
+                  fill: true
+                }
+              ]
+            },
+            options: {
+              responsive: true,
+              plugins: {
+                legend: { position: 'top' },
+                title: { display: true, text: 'Evolução Diária' }
+              }
+            }
+          });
+        }
+      });
+    });
+
+    // Upload da Tabela
+    document.getElementById('csvUploadTable').addEventListener('change', function (e) {
+      const file = e.target.files[0];
+      if (!file) return;
+
+      Papa.parse(file, {
+        header: true,
+        skipEmptyLines: true,
+        complete: function (results) {
+          const data = results.data;
+          const headers = Object.keys(data[0]);
+
+          const thead = document.querySelector('#dataTable thead');
+          const tbody = document.querySelector('#dataTable tbody');
+          thead.innerHTML = '';
+          tbody.innerHTML = '';
+
+          // Cabeçalho
+          const headerRow = document.createElement('tr');
+          headers.forEach(header => {
+            const th = document.createElement('th');
+            th.textContent = header;
+            th.className = 'border px-4 py-2 font-semibold';
+            headerRow.appendChild(th);
+          });
+          thead.appendChild(headerRow);
+
+          // Corpo da Tabela
+          data.forEach(row => {
+            const tr = document.createElement('tr');
+            headers.forEach(header => {
+              const td = document.createElement('td');
+              td.textContent = row[header];
+              td.className = 'border px-4 py-2';
+              tr.appendChild(td);
+            });
+            tbody.appendChild(tr);
+          });
+        }
+      });
+    });
+  </script>
+</body>
+</html>
