@@ -76,18 +76,6 @@
             <canvas id="callsChart"></canvas>
           </div>
 
-          <!-- Gráfico Gaussiano no lugar do KPI -->
-          <div class="bg-gray rounded-2xl shadow-lg p-6 transition-all hover:shadow-xl hover:scale-[1.02] cursor-pointer max-h-[350px] overflow-y-auto">
-            <h2 class="text-xl font-bold mb-2">Distribuição Gaussiana</h2>
-            <canvas id="gaussianChart"></canvas>
-          </div>
-
-          <div class="bg-gray rounded-2xl shadow-lg transition-all hover:shadow-xl hover:scale-[1.02] cursor-pointer p-4 max-h-[350px] overflow-y-auto">
-            <h2 class="text-xl font-bold mb-2">Tendências e Estratégia</h2>
-            <canvas id="trendChart"></canvas>
-          </div>
-
-
           <div class="bg-gray rounded-2xl shadow-lg transition-all hover:shadow-xl hover:scale-[1.02] cursor-pointer p-4 overflow-y-auto scroll-dark">
             <h2 class="text-xl font-bold mb-2">Agendamentos/Preferência</h2>
             <div class="overflow-y-auto max-h-[250px]">
@@ -237,6 +225,22 @@
             </table>
           </div>
           </div>
+          <!-- Gráfico Gaussiano-->
+          <div class="bg-gray rounded-2xl shadow-lg p-6 transition-all hover:shadow-xl hover:scale-[1.02] cursor-pointer max-h-[350px] overflow-y-auto">
+            <h2 class="text-xl font-bold mb-2">Distribuição Gaussiana</h2>
+            <canvas id="gaussianChart"></canvas>
+          </div>
+
+
+
+
+
+          
+          <div class="bg-gray rounded-2xl shadow-lg transition-all hover:shadow-xl hover:scale-[1.02] cursor-pointer p-4 max-h-[350px] overflow-y-auto">
+            <h2 class="text-xl font-bold mb-2">Tendências e Estratégia</h2>
+            <canvas id="trendChart"></canvas>
+          </div>
+
           </div>
       </main>
     </div>
@@ -489,8 +493,6 @@
         }
       }
     });
-
-    
 </script>
 </body>
 
