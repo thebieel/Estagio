@@ -37,11 +37,28 @@
 }
 
 #sidebar {
-  background-color: bg-gray-200;
+  background-color: #393f4c;
   border-radius: 0  rem;
   height: 100%;
   width: 15%;
   margin: auto;
+  font-family:'Times New Roman', Times, serif
+}
+.sidebar-link {
+  font-family: 'times new roman', Times, serif;
+  color: #ffffff;
+  font-size: 13px;
+}
+
+.menu-toggle-row{
+  font-family: 'Roboto', sans-serif;
+  color: #ffffff;
+  font-size: 12px;
+}
+.menu-text {
+  font-family: 'Roboto', sans-serif;
+  color: #ffffff;
+  font-size: 12px;
 }
 
 .sidebar-collapsed .menu-toggle-row {
