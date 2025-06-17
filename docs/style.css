@@ -1,20 +1,21 @@
+
 .scroll-light::-webkit-scrollbar {
     width: 8px;
-    }
+}
 
 .scroll-light::-webkit-scrollbar-track {
     background: #f3f4f6;
-    }
+}
 
 .scroll-light::-webkit-scrollbar-thumb {
     background-color: #cbd5e1;
     border-radius: 4px;
-    }
+}
 
 .scroll-light {
     scrollbar-width: thin;
     scrollbar-color: #cbd5e1 #f3f4f6;
-    }
+}
 
 .sidebar-collapsed {
     width: 4rem !important;
@@ -24,11 +25,7 @@
 .sidebar-collapsed .nav-text,
 .sidebar-collapsed .title {
     display: none;
-}
-
-.sidebar-link {
-  justify-content: flex-start;
-  padding-left: 1rem;
+    
 }
 
 .sidebar-collapsed .sidebar-link {
@@ -44,10 +41,11 @@
   margin: auto;
   font-family:'Times New Roman', Times, serif
 }
+
 .sidebar-link {
-  font-family: 'times new roman', Times, serif;
+  font-family: 'times new roman', Times, sans-serif;
   color: #ffffff;
-  font-size: 13px;
+  font-size: 15px;
 }
 
 .menu-toggle-row{
@@ -55,10 +53,11 @@
   color: #ffffff;
   font-size: 12px;
 }
+
 .menu-text {
-  font-family: 'Roboto', sans-serif;
+  font-family: 'times new roman', Times, sans-serif;
   color: #ffffff;
-  font-size: 12px;
+  font-size: 16px;
 }
 
 .sidebar-collapsed .menu-toggle-row {
@@ -70,3 +69,32 @@
   display: none;
 }
 
+header {
+  background-color: #c8cacc;
+  color: #000000;
+  padding: 10px;
+  text-align: center;
+  font-family: 'Times New Roman', Times, serif;
+}
+
+#toggleBtn:focus {
+  outline: none;
+  box-shadow: none;
+}
+
+.card-1 {
+  background-color: #c8cacc;
+
+}
+
+.card-2 {
+  background-color: #c8cacc;
+}
+
+.card-3 {
+  background-color: #c8cacc;
+}
+
+.card-4 {
+  background-color:#c8cacc;
+} 

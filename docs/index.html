@@ -4,9 +4,10 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>CC-Dashboard</title>
+  <title>Painel de ADM</title>
 
   <script> 
+
     tailwind.config = {
       theme: {
         extend: {
@@ -20,6 +21,7 @@
         }
       }
     }
+
   </script>
 
   <!-- Tailwind CSS-->
@@ -33,21 +35,20 @@
 </head>
 
 <body class="bg-gray-100 text-black font-[Inter]">
+
   <div class="flex h-screen overflow-hidden">
     <!-- Sidebar -->
     <aside id="sidebar" class="bg-white w-64 p-4 border-r transition-all duration-300 ease-in-out flex flex-col">
       <h2 class="title text-xl text-white font-bold mb-6 typewriter">Dashboard</h2>
-      <div class="flex justify-left pl-4 mb-4 mt-3 menu-toggle-row">
-        <button id="toggleBtn" class="text-white hover:text-black focus:outline-none">
+      <nav class="space-y-2 flex flex-col items-start">
+        <button id="toggleBtn"
+          class="sidebar-link flex items-center py-2 rounded hover:bg-gray-200 w-full transition-all duration-300 menu-toggle-row focus:outline-none box-shadow-none">
           <svg id="menuIcon" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
             stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
           </svg>
+          <span class="ml-3 menu-text">Menu</span>
         </button>
-        <span class="ml-3 text-lg font-semibold menu-text">Menu</span>
-      </div>
-      
-      <nav class="space-y-2 flex flex-col items-center">
         <a href="#" class="sidebar-link flex items-center py-2 rounded hover:bg-gray-200 w-full transition-all duration-200">
           <span class="material-icons">dashboard</span>
           <span class="nav-text ml-2">Visão Geral</span>
@@ -56,27 +57,26 @@
           <span class="material-icons">bar_chart</span>
           <span class="nav-text ml-2">Relatórios</span>
         </a>
-        <a href="#" class="sidebar-link flex items-center py-2 rounded hover:bg-g ray-200 w-full transition-all duration-200">
+        <a href="#" class="sidebar-link flex items-center py-2 rounded hover:bg-gray-200 w-full transition-all duration-200">
           <span class="material-icons">settings</span>
           <span class="nav-text ml-2">Configurações</span>
         </a>
       </nav>
     </aside>
 
-    <!-- Conteúdo principal -->
+<!-- Conteúdo principal -->
     <div id="contentArea" class="flex-1 flex flex-col overflow-auto">
-      <header class="flex items-center justify-between bg-white p-4 shadow"> <!-- header call center-->
+      <header class="flex items-center justify-between    p-4 shadow"> <!-- header call center-->
         <h1 class="text-xl font-semibold">Call Center</h1>
       </header>
-
       <main class="flex-1 p-6 bg-gray-50 overflow-auto scroll-light"> <!-- fundo da tela-->
         <div class="grid grid-cols-1 md:grid-cols-2 md:grid-rows-2 gap-4">
-          <div class="bg-gray rounded-2xl shadow-lg transition-all hover:shadow-xl hover:scale-[1.02] cursor-pointer p-4 max-h-[350px] overflow-y-auto">
+          <div class="card-1 rounded-2xl shadow-lg transition-all hover:shadow-xl hover:scale-[1.02] cursor-pointer p-4 max-h-[350px] overflow-y-auto">
             <h2 class="text-xl font-bold mb-2">Agendamentos X Ligações</h2>
             <canvas id="callsChart"></canvas>
           </div>
 
-          <div class="bg-gray rounded-2xl shadow-lg transition-all hover:shadow-xl hover:scale-[1.02] cursor-pointer p-4 overflow-y-auto scroll-dark">
+          <div class="card-2 bg-gray rounded-2xl shadow-lg transition-all hover:shadow-xl hover:scale-[1.02] cursor-pointer p-4 overflow-y-auto scroll-dark">
             <h2 class="text-xl font-bold mb-2">Agendamentos/Preferência</h2>
             <div class="overflow-y-auto max-h-[250px]">
             <table class="w-full text-sm table-auto">
@@ -226,16 +226,15 @@
           </div>
           </div>
           <!-- Gráfico Gaussiano-->
-          <div class="bg-gray rounded-2xl shadow-lg p-6 transition-all hover:shadow-xl hover:scale-[1.02] cursor-pointer max-h-[350px] overflow-y-auto">
+          <div class="card-3 bg-gray rounded-2xl shadow-lg p-6 transition-all hover:shadow-xl hover:scale-[1.02] cursor-pointer max-h-[350px] overflow-y-auto">
             <h2 class="text-xl font-bold mb-2">Distribuição Gaussiana</h2>
             <canvas id="gaussianChart"></canvas>
           </div>
 
-          <div class="bg-gray rounded-2xl shadow-lg transition-all hover:shadow-xl hover:scale-[1.02] cursor-pointer p-4 max-h-[350px] overflow-y-auto">
+          <div class="card-4 bg-gray rounded-2xl shadow-lg transition-all hover:shadow-xl hover:scale-[1.02] cursor-pointer p-4 max-h-[350px] overflow-y-auto">
             <h2 class="text-xl font-bold mb-2">Tendências e Estratégia</h2>
             <canvas id="trendChart"></canvas>
           </div>
-
           </div>
       </main>
     </div>
